@@ -2,10 +2,6 @@ variable "cmd" {
   description = "The command used to create the resource."
 }
 
-variable "destroy_cmd" {
-  description = "The command used to destroy the resource."
-}
-
 variable "account_id" {
   description = "The account that holds the role to assume in. Will use providers account by default"
   default     = "0"
@@ -34,11 +30,6 @@ resource "null_resource" "cli_resource" {
   provisioner "local-exec" {
     when    = create
     command = "/bin/bash -c '${var.role == 0 ? "" : "${local.assume_role_cmd} && "}${var.cmd}'"
-  }
-
-  provisioner "local-exec" {
-    when    = destroy
-    command = "/bin/bash -c '${var.role == 0 ? "" : "${local.assume_role_cmd} && "}${var.destroy_cmd}'"
   }
 
   # By depending on the null_resource, the cli resource effectively depends on the existance
