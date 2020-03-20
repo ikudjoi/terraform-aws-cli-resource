@@ -22,7 +22,7 @@ locals {
 resource "null_resource" "cli_resource" {
   provisioner "local-exec" {
     when    = create
-    command = "/bin/bash -c '${local.assume_role_cmd} && "}${var.cmd}'"
+    command = "/bin/bash -c '${local.assume_role_cmd} && ${var.cmd}'"
   }
 
   # By depending on the null_resource, the cli resource effectively depends on the existance
