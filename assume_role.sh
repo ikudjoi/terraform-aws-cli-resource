@@ -1,4 +1,4 @@
-if [ "$#" -ne 2 ]
+if [ "$#" -ne 1 ]
 then
   echo "Usage: source assume_role.sh [role_arn]"
   exit 1
